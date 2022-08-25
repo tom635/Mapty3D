@@ -60,6 +60,13 @@ public class FloodSimulator : MonoBehaviour
 
     }
 
+    public void CalculateBuildings()
+    {
+        Transform bldg = map.regionMap.transform.Find("Buildings");
+        Transform[] temp = bldg.Find("buildings").GetComponentsInChildren<Transform>();
+    }
+
+
     public void FloodColoring(float FloodValue)
     {
         foreach (var item in heightMap)

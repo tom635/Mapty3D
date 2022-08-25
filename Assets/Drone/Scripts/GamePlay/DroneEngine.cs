@@ -6,14 +6,14 @@ using UnityEngine;
 namespace Drone.Scripts.GamePlay
 {
     [RequireComponent(typeof(BoxCollider))]
-    public class DroneEngine : MonoBehaviour,IEngine
+    public class DroneEngine : MonoBehaviour, IEngine
     {
         #region Variables
 
-        [Header("Engine Properties")] 
-        [SerializeField] private float maxPower = 4;
+        [Header("Engine Properties")]
+        [SerializeField] private float maxPower = 50;
 
-        [Header("Propeller Properties")] 
+        [Header("Propeller Properties")]
         [SerializeField] private Transform propeller;
         [SerializeField] private float maxpropRotSpeed;
         #endregion
@@ -31,10 +31,10 @@ namespace Drone.Scripts.GamePlay
             upVector.z = 0;
             float diff = 1 - upVector.magnitude;
             float finalDiff = diff * Physics.gravity.magnitude;
-            
+
             Vector3 engineForce = Vector3.zero;
-            engineForce = transform.up * ((rb.mass*Physics.gravity.magnitude + finalDiff ) + (inputs.Throttle * maxPower))/4;
-            rb.AddForce(engineForce,ForceMode.Force);
+            engineForce = transform.up * ((rb.mass * Physics.gravity.magnitude + finalDiff) + (inputs.Throttle * maxPower)) / 4;
+            rb.AddForce(engineForce, ForceMode.Force);
             HandlePropellers();
         }
 
@@ -45,18 +45,18 @@ namespace Drone.Scripts.GamePlay
             {
                 return;
             }
-            if (Physics.Raycast(transform.position, Vector3.down, 0.1f,LayerMask.GetMask("Ground")))
+            if (Physics.Raycast(transform.position, Vector3.down, 0.1f, LayerMask.GetMask("Ground")))
             {
                 propRotSpeed = Mathf.Lerp(propRotSpeed, 0, 4 * Time.deltaTime);
             }
             else
             {
-                propRotSpeed = Mathf.Lerp(propRotSpeed, maxpropRotSpeed, 10* Time.deltaTime);
+                propRotSpeed = Mathf.Lerp(propRotSpeed, maxpropRotSpeed, 10 * Time.deltaTime);
             }
-            propeller.Rotate(Vector3.forward,propRotSpeed);
+            propeller.Rotate(Vector3.forward, propRotSpeed);
         }
-        
-        
+
+
 
         #endregion
 

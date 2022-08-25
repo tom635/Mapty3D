@@ -127,6 +127,7 @@ public class Login : MonoBehaviour
         }
         catch (Exception ex)
         {
+            Debug.Log(ex);
             PlayerPrefs.DeleteKey("token");
             PlayerPrefs.DeleteKey("userId");
             ActivateButtons(true);
@@ -167,6 +168,7 @@ public class Login : MonoBehaviour
         }
         catch (Exception ex)
         {
+            Debug.Log(ex);
             PlayerPrefs.DeleteKey("token");
             PlayerPrefs.DeleteKey("userId");
             ActivateButtons(true);

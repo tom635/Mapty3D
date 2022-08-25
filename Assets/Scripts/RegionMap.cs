@@ -4,6 +4,7 @@ using UnityEngine;
 using Mapzen.VectorData;
 using Mapzen.Unity;
 using Mapzen.VectorData.Formats;
+using UniColliderInterpolator;
 
 namespace Mapzen
 {
@@ -314,7 +315,26 @@ namespace Mapzen
             {
                 item.gameObject.AddComponent<MeshCollider>();
             }
+
             flood.CalculateHeights();
+            GenerateColliders();
+        }
+
+        public void GenerateColliders()
+        {
+            Transform bldg = regionMap.transform.Find("Buildings");
+            Transform[] temp1 = bldg.Find("buildings").GetComponentsInChildren<Transform>();
+            Debug.Log(temp1[0]);
+            foreach (Transform item in temp1)
+            {
+                item.gameObject.GetComponent<MeshCollider>().convex = true;
+                item.gameObject.AddComponent<Rigidbody>();
+                Rigidbody tem = item.gameObject.GetComponent<Rigidbody>();
+                tem.useGravity = true;
+                tem.mass = 100000f;
+                tem.drag = 1000;
+            }
+
         }
 
         public bool IsValid()
