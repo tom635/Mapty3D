@@ -20,7 +20,7 @@ MonoBehaviour:
     Matchers: []
     Style:
       PolygonBuilder:
-        Material: {fileID: 2100000, guid: bb0267789bf4345c7916b57b125fc6ca, type: 2}
+        Material: {fileID: 2100000, guid: 16ca5feb16ef2d744852096378401523, type: 2}
         Extrusion: 0
         UVMode: 1
         MinHeight: 0
