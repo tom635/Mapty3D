@@ -12,7 +12,7 @@ namespace Mapzen
         // Version information
         // This allows us to check whether an asset was serialized with a different version than this code.
         // If a serialized field of this class is changed or renamed, currentAssetVersion should be incremented.
-
+        private FloodSimulator flood;
         private const int currentAssetVersion = 1;
         [SerializeField] private int serializedAssetVersion = currentAssetVersion;
 
@@ -48,9 +48,15 @@ namespace Mapzen
 
         private AsyncWorker worker = new AsyncWorker(2);
 
-        private GameObject regionMap;
+        public GameObject regionMap;
 
         private TileCache tileCache = new TileCache(50);
+
+
+        public void Start()
+        {
+            flood = gameObject.GetComponent<FloodSimulator>();
+        }
 
 
         public TileArea setTileArea(List<string> boundingBox)
@@ -303,12 +309,12 @@ namespace Mapzen
 
             sceneGraph.Generate();
 
-            Transform[] temp =regionMap.GetComponentsInChildren<Transform>();
-            foreach(Transform item in temp)
+            Transform[] temp = regionMap.GetComponentsInChildren<Transform>();
+            foreach (Transform item in temp)
             {
-                Debug.Log(item);
                 item.gameObject.AddComponent<MeshCollider>();
             }
+            flood.CalculateHeights();
         }
 
         public bool IsValid()
@@ -353,5 +359,6 @@ namespace Mapzen
                 serializedAssetVersion = currentAssetVersion;
             }
         }
+
     }
 }
