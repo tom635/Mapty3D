@@ -20,11 +20,11 @@ MonoBehaviour:
     Matchers: []
     Style:
       PolygonBuilder:
-        Material: {fileID: 2100000, guid: bb0267789bf4345c7916b57b125fc6ca, type: 2}
+        Material: {fileID: 2100000, guid: fb659c98d6ac4db41b88596ff2c4e2e1, type: 2}
         Extrusion: 0
-        UVMode: 1
-        MinHeight: 0
-        MaxHeight: 0
+        UVMode: 3
+        MinHeight: 1
+        MaxHeight: 2
         Enabled: 1
       PolylineBuilder:
         Material: {fileID: 0}

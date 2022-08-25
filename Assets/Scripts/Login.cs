@@ -21,7 +21,7 @@ public class Login : MonoBehaviour
     [SerializeField] private Button createButton;
     [SerializeField] private Button loginButtonNext;
     [SerializeField] private Button signupButtonNext;
-   
+
     [SerializeField] private TMP_InputField emailInputField;
     [SerializeField] private TMP_InputField passwordInputField;
     [SerializeField] private TMP_InputField signupEmailInputField;

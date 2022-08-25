@@ -12,7 +12,7 @@ namespace Mapzen
         // Version information
         // This allows us to check whether an asset was serialized with a different version than this code.
         // If a serialized field of this class is changed or renamed, currentAssetVersion should be incremented.
-
+        private FloodSimulator flood;
         private const int currentAssetVersion = 1;
         [SerializeField] private int serializedAssetVersion = currentAssetVersion;
 
@@ -48,9 +48,15 @@ namespace Mapzen
 
         private AsyncWorker worker = new AsyncWorker(2);
 
-        private GameObject regionMap;
+        public GameObject regionMap;
 
         private TileCache tileCache = new TileCache(50);
+
+
+        public void Start()
+        {
+            flood = gameObject.GetComponent<FloodSimulator>();
+        }
 
 
         public TileArea setTileArea(List<string> boundingBox)
@@ -303,31 +309,12 @@ namespace Mapzen
 
             sceneGraph.Generate();
 
-            Transform[] temp =regionMap.GetComponentsInChildren<Transform>();
-            foreach(Transform item in temp)
+            Transform[] temp = regionMap.GetComponentsInChildren<Transform>();
+            foreach (Transform item in temp)
             {
-                Debug.Log(item);
                 item.gameObject.AddComponent<MeshCollider>();
-                //item.gameObject.GetComponent<MeshCollider>().convex = true;
             }
-            //Transform earth = regionMap.transform.Find("Earth");
-            //Transform[] earth2 = earth.Find("earth").GetComponentsInChildren<Transform>();
-            //earth2[0].gameObject.AddComponent<Rigidbody>();
-            //earth2[0].gameObject.AddComponent<MeshCollider>();
-            //earth2[0].gameObject.GetComponent<Rigidbody>().useGravity = false;
-            //earth2[0].gameObject.GetComponent<MeshCollider>().convex = true;
-
-            Transform bldg = regionMap.transform.Find("Buildings");
-            Transform[] temp1 = bldg.Find("buildings").GetComponentsInChildren<Transform>();
-            Debug.Log(temp1[0]);
-            foreach (Transform item in temp1)
-            {
-                item.gameObject.AddComponent<Rigidbody>();
-                item.gameObject.GetComponent<Rigidbody>().isKinematic = true;
-                item.gameObject.GetComponent<Rigidbody>().useGravity = false;
-            }
-
-
+            flood.CalculateHeights();
         }
 
         public bool IsValid()
@@ -372,5 +359,6 @@ namespace Mapzen
                 serializedAssetVersion = currentAssetVersion;
             }
         }
+
     }
 }
