@@ -7,6 +7,7 @@ public class MenuScript : MonoBehaviour
     public GameObject searchMenu;
     public GameObject zoomMenu;
     public GameObject floodMenu;
+    public GameObject earthquakeMenu;
     private bool isMenuOpen = false;
     void Update()
     {
@@ -29,6 +30,7 @@ public class MenuScript : MonoBehaviour
             searchMenu.SetActive(true);
             zoomMenu.SetActive(true);
             floodMenu.SetActive(true);
+            earthquakeMenu.SetActive(true);
             isMenuOpen = true;
         }
     }
@@ -40,6 +42,7 @@ public class MenuScript : MonoBehaviour
             searchMenu.SetActive(false);
             zoomMenu.SetActive(false);
             floodMenu.SetActive(false);
+            earthquakeMenu.SetActive(false);
             isMenuOpen = false;
         }
     }

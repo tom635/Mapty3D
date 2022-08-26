@@ -14,8 +14,11 @@ namespace Mapzen
         // This allows us to check whether an asset was serialized with a different version than this code.
         // If a serialized field of this class is changed or renamed, currentAssetVersion should be incremented.
         private FloodSimulator flood;
+        private EarthquakeBuildings earthquakeBuildings;
         private const int currentAssetVersion = 1;
         [SerializeField] private int serializedAssetVersion = currentAssetVersion;
+
+        public Material BuildingMaterial;
 
         // Public fields
         // These are serialized, so renaming them will break asset compatibility.
@@ -53,10 +56,10 @@ namespace Mapzen
 
         private TileCache tileCache = new TileCache(50);
 
-
         public void Start()
         {
             flood = gameObject.GetComponent<FloodSimulator>();
+            earthquakeBuildings = gameObject.GetComponent<EarthquakeBuildings>();
         }
 
 
@@ -317,7 +320,7 @@ namespace Mapzen
             }
 
             flood.CalculateHeights();
-            GenerateColliders();
+            //GenerateColliders();
         }
 
         public void GenerateColliders()
@@ -327,12 +330,15 @@ namespace Mapzen
             Debug.Log(temp1[0]);
             foreach (Transform item in temp1)
             {
-                item.gameObject.GetComponent<MeshCollider>().convex = true;
+                //item.gameObject.GetComponent<BoxCollider>().material = Buil;
                 item.gameObject.AddComponent<Rigidbody>();
                 Rigidbody tem = item.gameObject.GetComponent<Rigidbody>();
                 tem.useGravity = true;
                 tem.mass = 100000f;
-                tem.drag = 1000;
+                tem.drag = 100000f;
+                //tem.angularDrag = 100000f;
+                //tem.isKinematic = false;
+                
             }
 
         }
