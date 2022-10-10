@@ -16,6 +16,7 @@ How we can reduce the probalility of flooding in a desired area using the resour
 
 With the stats available for building we can simulate an earthquake and design the optimal evaculation route according to the building stats
  
+We can increase the rainfall gradually the estimate the regions which are more prone to flooding.
 
 # Screenshots:
 <p float="left">
